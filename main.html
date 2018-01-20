@@ -9,7 +9,7 @@
   
   <script>  
   function payOut() {
-      window.location.assign("http://127.0.0.1:5000/request/" + document.getElementById("reqForm").value);
+      window.location.assign("http://adwatcher.hopto.org:7777/request/" + document.getElementById("reqForm").value);
   }
   </script>
    
@@ -87,6 +87,10 @@ margin-left:100px;
   <br>
   <h4 id="note1">*Use your Testnet LN enabled wallet to generate an invoice for one satoshi => <b>0.00000001 BTC</b></h4>
   <br>
+  <h4 id="note1">Connect to 021c42d88d7a73642c274839737fe6c351ee675ecac739537fd307e8bae886b05e@34.213.214.39:9735</h4>
+  <br>
+  <h4 id="note1">Open a channel with the pubkey above</h4>
+  <br>
   <h4 id="note1">Don't have a wallet? Try the <a href="https://github.com/LN-Zap/zap-desktop">LN-ZAP Wallet</a></h4>
   <br>
   <h4 id="note1">This microservice is powered by <a href="https://github.com/lightningnetwork/lnd">LND</a></h4>
@@ -98,5 +102,5 @@ margin-left:100px;
     };
     
     $("#paid").hide(); 
-    window.setTimeout(readyToPay, 60000);
+    window.setTimeout(readyToPay, 6000);
   </script>
