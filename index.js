@@ -40,7 +40,7 @@ app.get('/request/:Payment/',function (req, res) {
             var recent = response.payments.length-1;
             var hash = response.payments[recent].payment_hash 
             var date = response.payments[recent].creation_date;
-            var ts = moment.unix(date).format("LL");
+            var ts = moment.unix(date).format("lll");
             console.log('ListPayments: ' + hash);
             //pass listpayments API data to web app
             res.send(reqPage+'<br><h4>Sent one satoshi!</h4><br><h4>Payment Hash: '+'"'+ hash + '"' + '<br><h4>Timestamp: '+'"'+ ts  + '"' + '</h4><br><input type="button" value="Go Back" onclick="goBack()" class="btn-primary btn"></body></div>');
