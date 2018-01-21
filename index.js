@@ -20,11 +20,40 @@ app.set('port', (process.env.PORT || 7777));
      res.send(html);
 });
   
+ app.get('/nodeInfo', function (req, res){
+   //generate current walletBalance
+    call = lightning.walletBalance({
+        witness_only: false,
+    }, function(err, response) {
+          console.log('WalletBalance: ' + response.total_balance);
+          var balance = response.total_balance;
+   
+         //generate channel balance
+     call = lightning.channelBalance({}, function(err, response) {
+            console.log('ChannelBalance: ' + response.balance);
+            var chanBalance = response.balance
   
+            //get number of peers
+  call = lightning.listPeers({}, function(err, response) {
+    console.log('Peer Count: ' + '"' + response.peers.length + '"');
+    var peeps = response.peers.length;
+
+    res.send(reqPage+'<br></h4><br><h4>Peers: ' + peeps  + '<br><h4>Channel Balance: '+ chanBalance + '</h4><br><input type="button" value="Go Back" onclick="goBack()" class="btn-primary btn"></body></div>');
+     });
+    });
+  });
+});
+    
+
+  
+
+ 
 app.get('/request/:Payment/',function (req, res) {
     var data = req.params;
     var pay_req = data.Payment;
     console.log(pay_req);
+    
+  
     //send 1 satoshi payment if there is a valid invoice
     call = lightning.sendPaymentSync({ 
     amt: 1,
@@ -43,7 +72,7 @@ app.get('/request/:Payment/',function (req, res) {
             var ts = moment.unix(date).format("lll");
             console.log('ListPayments: ' + hash);
             //pass listpayments API data to web app
-            res.send(reqPage+'<br><h4>Sent one satoshi!</h4><br><h4>Payment Hash: '+'"'+ hash + '"' + '<br><h4>Timestamp: '+'"'+ ts  + '"' + '</h4><br><input type="button" value="Go Back" onclick="goBack()" class="btn-primary btn"></body></div>');
+            res.send(reqPage+'<br><h4>Sent one satoshi!</h4><br><h4>Payment Hash: '+ hash + '<br><h4>Timestamp: '+ ts  +  '</h4><br><input type="button" value="Go Back" onclick="goBack()" class="btn-primary btn"></body></div>');
         
     });
     
