@@ -1,4 +1,9 @@
 # adWatcher
 lnd microservice
 
-need to add a pay to skip option... (^_^)
+need to add:
+
+https migration
+
+pay to skip 100 satoshi option
+
