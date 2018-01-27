@@ -4,7 +4,9 @@ lnd microservice
 you can test this on your machine by installing lnd via the instructions here:
 https://github.com/lightningnetwork/lnd/blob/master/docs/INSTALL.md
 
-Then: `git clone https://github.com/callmekurisu/adWatcher.git`
+`git clone https://github.com/callmekurisu/adWatcher.git`
+`cd adWatcher`
+`nodemon index.js`
 
 You will need to configure for localhost testing as this version is currently running on my server.
 
