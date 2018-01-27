@@ -1,8 +1,10 @@
 # adWatcher
 lnd microservice
 
-you can test this on your machine by installing lnd via the instructions here:
+you can test this on your machine by installing LND via the instructions here:
 https://github.com/lightningnetwork/lnd/blob/master/docs/INSTALL.md
+
+After you have LND:
 
 `git clone https://github.com/callmekurisu/adWatcher.git`<br>
 `cd adWatcher`<br>
