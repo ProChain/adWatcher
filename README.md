@@ -18,5 +18,5 @@ The LND API Reference is located here: http://api.lightning.community/?javascrip
 
 https migration
 
-pay to skip 100 satoshi option
+pay to skip 10 satoshi option
 
