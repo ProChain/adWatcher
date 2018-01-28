@@ -1,4 +1,4 @@
-//testing nodemon 23JAN18 at 2130
+//testing nodemon 27JAN18 at 1026
 var grpc = require('grpc');
 var fs = require('fs');
 var express = require('express');
@@ -41,15 +41,15 @@ app.set('port', (process.env.PORT || 7777));
     console.log('Peer Count: ' + '"' + response.peers.length + '"');
     var peeps = response.peers.length;
 
-    res.send(reqPage+'<br></h4><br><h4>Peers: ' + peeps  + '<br><h4>Channel Balance: '+ chanBalance + '</h4><br><input type="button" value="Go Back" onclick="goBack()" class="btn-primary btn"></body></div>');
+    res.send(reqPage+'<br></h4><br><h4>Peers: ' + peeps  + '<br><h4>Channel Balance: '+ chanBalance + '</h4><br><input type="button" value="Go Back" onclick="goBack()" class="btn-primary btn"></body></div> <iframe id="video" width="1200" height="600" src="http://explorer.acinq.co/#/n/03de1abc27663967f60872cdfab58c8fe26b07ffd5f06e31be2748753e2b40c362"></iframe>');
      });
     });
   });
 });
     
-
-  
-
+app.get('/request/',function (req, res) {
+    res.send(reqPage + '<h2>Error. Blank request.</h2><br><input type="button" value="Go Back" onclick="goBack()" class="btn-primary btn"></body></div>');  
+});
  
 app.get('/request/:Payment/',function (req, res) {
     var data = req.params;
@@ -94,7 +94,7 @@ app.get('/request/:Payment/',function (req, res) {
 });
 
   //live testing
-    app.listen(7777, '0.0.0.0', function(err) {
+    app.listen(7777, '172.31.44.124', function(err) {
   console.log("Started listening on %s", app.url);
 });
   
