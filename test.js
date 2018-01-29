@@ -25,4 +25,14 @@ call = lightning.listPeers({}, function(err, response) {
     console.log('ListPeers: ' + '"'+ response.peers.length + '"');
   });
 
-
+    
+     //create invoice to allow skipping
+     call = lightning.addInvoice({ 
+        memo: "adwatcher",
+        value: 10,
+        }, function(err, response) {
+            
+            console.log('AddInvoice: ' + JSON.stringify(response));
+            console.log(err)
+            //display newly generated invoices everytime the page loads with qr code
+            });
