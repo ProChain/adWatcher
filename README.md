@@ -8,6 +8,7 @@ After you have LND:
 
 `git clone https://github.com/callmekurisu/adWatcher.git`<br>
 `cd adWatcher`<br>
+`npm install` <br>
 `nodemon index.js`
 
 You will need to configure for localhost testing as this version is currently running on my server.
