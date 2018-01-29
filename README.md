@@ -19,5 +19,5 @@ The LND API Reference is located here: http://api.lightning.community/?javascrip
 
 <b>TODOS</b>
 <li>https migration</li>
-<li>pay to skip/donate 10 satoshi option</li>
+<li>new content</li>
 <li>qr code generation for payment donations</li>
