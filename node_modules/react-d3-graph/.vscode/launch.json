@@ -1,0 +1,21 @@
+// https://github.com/Microsoft/vscode-chrome-debug-core/issues/44 - Working config
+// http://blog.teamtreehouse.com/introduction-source-maps - about src maps
+// https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome - extension
+{
+    "version": "0.0.1",
+    "configurations": [
+        {
+            "name": "rd3g sandbox",
+            "type": "chrome",
+            "request": "launch",
+            "port": 9222,
+            "url": "http://localhost:3002/",
+            "webRoot": "${workspaceRoot}",
+            "sourceMaps": true,
+            "trace": true,
+            "sourceMapPathOverrides": {
+                "webpack:///*": "${webRoot}/*"
+            }
+        }
+    ]
+}
