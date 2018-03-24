@@ -18,6 +18,6 @@ The LND API Reference is located here: http://api.lightning.community/?javascrip
 (^_^)
 
 <b>TODOS</b>
-<li>ssl verification</li>
-<li>new content</li>
-<li>qr code generation for payment donations</li>
+<li>New user flow</lii>
+<li>Pay to upload and share new content</li>
+<li>Get paid to be a watcher</li>
