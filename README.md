@@ -1,6 +1,8 @@
 # adWatcher
 lnd microservice
+<br>
 now on LND mainnet!
+<br>
 #craefulgang
 
 you can test this on your machine by installing LND via the instructions here:
@@ -15,11 +17,13 @@ After you have LND:
 `nodemon index.js`
 
 *You will need to configure for localhost testing as this version is currently running on my server.
-*Neutrion not currently on LND mainnet. Bitcoin full node is necessary.
-
+<br>
+*Neutrino not currently on LND mainnet. Bitcoin full node is necessary.
+<br>
 The LND API Reference is located here: http://api.lightning.community/?javascript#lnd-api-reference
+<br>
 *LND API is not working for me as of 23MAR18. Using node-cmd as a bypass"
-
+<br>
 (^_^)
 
 <b>TODOS</b>
