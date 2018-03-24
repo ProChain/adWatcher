@@ -6,6 +6,7 @@ now on LND mainnet!
 you can test this on your machine by installing LND via the instructions here:
 https://github.com/lightningnetwork/lnd/blob/master/docs/INSTALL.md
 
+
 After you have LND:
 
 `git clone https://github.com/callmekurisu/adWatcher.git`<br>
@@ -13,7 +14,8 @@ After you have LND:
 `npm install` <br>
 `nodemon index.js`
 
-You will need to configure for localhost testing as this version is currently running on my server.
+*You will need to configure for localhost testing as this version is currently running on my server.
+*Neutrion not currently on LND mainnet. Bitcoin full node is necessary.
 
 The LND API Reference is located here: http://api.lightning.community/?javascript#lnd-api-reference
 *LND API is not working for me as of 23MAR18. Using node-cmd as a bypass"
