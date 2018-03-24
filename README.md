@@ -16,13 +16,13 @@ After you have LND:
 `npm install` <br>
 `nodemon index.js`
 
-*You will need to configure for localhost testing as this version is currently running on my server.
+You will need to configure for localhost testing as this version is currently running on my server.
 <br>
-*Neutrino not currently on LND mainnet. Bitcoin full node is necessary.
+Neutrino not currently on LND mainnet. Bitcoin full node is necessary.
 <br>
 The LND API Reference is located here: http://api.lightning.community/?javascript#lnd-api-reference
 <br>
-*LND API is not working for me as of 23MAR18. Using node-cmd as a bypass"
+LND API is not working for me as of 23MAR18. Using node-cmd as a bypass
 <br>
 (^_^)
 
