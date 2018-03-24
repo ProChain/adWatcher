@@ -10,7 +10,7 @@
   
   <script>  
   function payOut() {
-      window.location.assign("http://adwatcher.hopto.org:7777/request/" + document.getElementById("reqForm").value);
+      window.location.assign("https://adwatcher.hopto.org/request/" + document.getElementById("reqForm").value);
   }
   </script>
    
@@ -102,8 +102,8 @@ margin-left:100px;
 <body>
     <div container id="header">
     <h1 id="title"><a href="https://github.com/callmekurisu/adWatcher" target="_blank">
-  <img class="icon2" src="https://pbs.twimg.com/profile_images/936765427518021632/pZ4CchYi.jpg"></img>
-  </a>LND adWatcher Microservice v0.2 Beta  <a href="http://adwatcher.hopto.org:7777/nodeInfo"><img class="icon2"  src="http://laoblogger.com/images/image-of-a-lightning-bolt-3.jpg"></img></a></h1>
+  <img class="icon2" src="https://assets-cdn.github.com/images/modules/open_graph/github-octocat.png"></img>
+  </a>LND adWatcher Microservice v0.33 Beta  <a href="https://adwatcher.hopto.org/nodeInfo"><img class="icon2"  src="http://laoblogger.com/images/image-of-a-lightning-bolt-3.jpg"></img></a></h1>
     
     <iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/rrr_zPmEiME?autoplay=1&showinfo=0&controls=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     <br></br>
@@ -111,17 +111,11 @@ margin-left:100px;
   <input id="reqForm" type="text" name="req" placeholder="Enter 5 satoshi payment request">
   <input id="paid" type="button" value="Get Paid!" onclick="payOut()" class="btn-primary btn"> 
   <br>
-   <h4 id="note1">Watch the video, you can earn five satoshis (^_^)</h4>
+   <h4 id="note1">Please wait while preparing 5 satoshi payout.</h4>
   <br>
-  <h4 id="note1">Connect to 03de1abc27663967f60872cdfab58c8fe26b07ffd5f06e31be2748753e2b40c362@34.215.177.226:9735<img class="uri" src="https://i.imgur.com/uu6vc0x.png"></img></h4>
+  <h4 id="note1">If no hops are possible connect to "0239027416c376a691c141c843bbf0c84156ddacfa684868abf4abb36a76007cbf@34.215.177.226:9735"</h4>
   <br>
-  <h4 id="note1">Open a channel with the pubkey above</h4>
-  <br>
-  <h4 id="note1">*Use your <b>Testnet</b> LN enabled wallet to generate an invoice for 5 satoshis => <b>0.00000005 BTC</b></h4>
-  <br>
-  <h4 id="note1">Don't have a wallet? Try the <a href="https://github.com/LN-Zap/zap-desktop/releases/tag/v0.1.0-beta">LN-ZAP Wallet</a></h4>
-  <br>
-  <h4 id="note1">Impatient? Try the <a href="https://htlc.me">LND Web Wallet</a></h4>
+  <h4 id="note1">*Use your <b>Mainnet</b> LN enabled wallet to generate an invoice for 5 satoshis => <b>0.00000005 BTC</b></h4>
   <br>
   <h4 id="note1">This microservice is powered by <a href="https://github.com/lightningnetwork/lnd">LND</a></h4>
 
