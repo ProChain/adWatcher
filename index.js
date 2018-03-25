@@ -1,4 +1,4 @@
-//testing nodemon 22MAR18 at 0221
+//testing nodemon 24MAR18 at 2119
 var grpc = require('grpc');
 var fs = require('fs');
 var express = require('express');
@@ -58,7 +58,7 @@ app.get('/',function (req, res) {
             console.log('Donation pay_req: ',add.pay_req)
 
             //display newly generated invoices everytime the page loads with qr code(still working on qr code gerneration)
-            res.send(html+''+ '<br><h4 id="note1">Please pay 50 sat invoice to donate, then click "support" to verify.</h4><p id="invoice">'+add.pay_req+'</p><a href="https://adwatcher.hopto.org/skip/' +add.pay_req + '/"'+'><img id="support" src="https://pre00.deviantart.net/b38e/th/pre/i/2015/181/f/3/youtube_support_button__donation_button__by_koolgoldfinch-d8zf3if.png"></img></a><!--Hide the pay button until user watches for a minute --><script>function readyToPay() {$("#paid").show("slow");};$("#paid").hide(); window.setTimeout(readyToPay, 300000);</script>');
+            res.send(html+''+ '<br><h4 id="note1">Please pay 50 sat invoice to donate, then click "support" to verify.</h4><p id="invoice">'+add.pay_req+'</p><a href="https://adwatcher.hopto.org/skip/' +add.pay_req + '/"'+'><img id="support" src="https://pre00.deviantart.net/b38e/th/pre/i/2015/181/f/3/youtube_support_button__donation_button__by_koolgoldfinch-d8zf3if.png"></img></a><!--Hide the pay button until user watches for a minute --><script>function readyToPay() {$("#paid").show("slow");};$("#paid").hide(); window.setTimeout(readyToPay, 30000);</script>');
        }); 
     });
   
@@ -83,7 +83,7 @@ app.get('/',function (req, res) {
             var peeps = lp.peers.length
 
 
-    res.send(reqPage+'<br></h4 id="note1"><br><h4>Peers: ' + peeps  + '<br><h4 id="note1">Channel Balance: '+ chanBalance + '</h4><br><input type="button" value="Go Back" onclick="goBack()" class="btn-primary btn"></body></div> <iframe id="video" width="1200" height="600" src="https://lnmainnet.gaben.win/"></iframe>');
+    res.send(reqPage+'<br></h4 id="note1"><br><h4>Peers: ' + peeps  + '<br><h4 id="note1">Channel Balance: '+ chanBalance + '</h4><br><input type="button" value="Go Back" onclick="goBack()" class="btn-primary btn"></body></div> <iframe id="video" width="1200" height="600" src="https://lightning.engineering/technology.html"></iframe>');
      });
     });
   });
@@ -97,9 +97,9 @@ app.get('/skip/:Invoice/',function (req, res) {
         'cd ~/gocode/bin/ && ./lncli listinvoices',
         function(err, data, stderr){
             var li = JSON.parse(data)
-            console.log('Invoices: ', li)
+            console.log('Invoices: ', li.invoices)
 
-        for (i=0;i<li.length;i++){
+        for (i=0;i<li.invoices.length;i++){
             var rpr = li.invoices[i]["payment_request"];
             var settled = li.invoices[i]["settled"];
             console.log(rpr + ' ' + settled);
@@ -124,39 +124,38 @@ app.get('/request/',function (req, res) {
  
 //handle all other requests
 app.get('/request/:Payment/',function (req, res) {
-    var data = req.params;
-    var pay_req = data.Payment;
-    console.log(pay_req);
-    
-    cmd.get( 
-       'cd ~/gocode/bin/ && ./lncli sendpayment --amt 5 --pay_req='+pay_req,
-            function(err, data, stderr){
-            var sp = JSON.parse(data)
-                 
-            //send 5 satoshi payment if there is a valid invoice
-            console.log('Send Payment: ' + sp.payment_preimage); 
-            
-            cmd.get( 
-            'cd ~/gocode/bin/ && ./lncli listpayments',
-                function(err, data, stderr){
-                   var listpay = JSON.parse(data)
-                   console.log('Payments: ', listpay.payments )
-                   if (sp.payment_error = ''){ 
-                   var recent = listpay.payments.length-1;
-                   var hash = listpay.payments[recent].payment_hash
-                   var date = listpay.payments[recent].creation_date;
-                   var ts = moment.unix(date).format("lll"); 
-                   console.log('ListPayments: ' + hash);
-                   //pass listpayments API data to web app
-                   res.send(reqPage+'<br><h4 id="note1">Sent five satoshis!</h4><br><h4>Payment Hash: '+ hash + '<br><h4 id="note1">Timestamp: '+ ts  +  '</h4><br><input id="back" type="button" value="Go Back" onclick="goBack()" class="btn-primary btn"></body></div>');
-    
-    } else {
-        console.log("Invalid payment request.");
-        res.send(reqPage + '<h2 id="note1">'+'"'+"Could not process your request!"+'"'+'</h2><br><input type="button" value="Go Back" onclick="goBack()" class="btn-primary btn"></body></div>');          
-           } 
-    });
-  });
-}); 
+    var data = req.params;var pay_req = data.Payment;console.log(pay_req);
+    cmd.get('cd ~/gocode/bin/ && ./lncli decodepayreq '+pay_req,
+           function(err, data, stderr){
+                if(err){
+                    console.log("Bad payment request")
+                    res.send(reqPage + '<h2 id="note1">'+'"'+"Could not process your request!"+'"'+'</h2><br><input type="button" value="Go Back" onclick="goBack()" class="btn-primary btn"></body></div>');
+                } else if(JSON.parse(data).num_satoshis>500) {
+                      console.log("Illegal request. More than 500 sats")
+                      res.send(reqPage + '<h2 id="note1">'+'"'+"Request must be <500 sats!"+'"'+'</h2><br><input type="button" value="Go Back" onclick="goBack()" class="btn-primary btn"></body></div>');
+                } else if (JSON.parse(data).num_satoshis<=500) {
+                      cmd.get( 'cd ~/gocode/bin/ && ./lncli sendpayment --pay_req='+pay_req,
+                             function(err, data, stderr){
+                                if(err){
+                                    console.log("Something went wrong...")
+                                    res.send(reqPage + '<h2 id="note1">'+'"'+"Could not process your request!"+'"'+'</h2><br><input type="button" value="Go Back" onclick="goBack()" class="btn-primary btn"></body></div>');
+                                } else {
+                                    var sp = JSON.parse(data)
+                                    console.log('Send Payment: ' + sp.payment_preimage); 
+                                    cmd.get('cd ~/gocode/bin/ && ./lncli listpayments',
+                                           function(err, data, stderr){
+                                               var listpay = JSON.parse(data)
+                                               console.log('Payments: ', listpay.payments )
+                                               var recent = listpay.payments.length-1;var hash = listpay.payments[recent].payment_hash
+                                               var date = listpay.payments[recent].creation_date;var ts = moment.unix(date).format("lll"); 
+                                               console.log('ListPayments: ' + hash);
+                                               if(sp.payment_preimage == listpay.payments[recent].payment_preimage){
+                                                   res.send(reqPage+'<br><h4 id="note1">Sent payment!</h4><br><h4>Payment Hash: '+ hash + '<br><h4 id="note1">Timestamp: '+ ts  +  '</h4><br><input id="back" type="button" value="Go Back" onclick="goBack()" class="btn-primary btn"></body></div>');
+                                                   } else {
+                                                       console.log("Invalid payment request.");
+                                                       res.send(reqPage + '<h2 id="note1">'+'"'+"Could not process your request!"+'"'+'</h2><br><input type="button" value="Go Back" onclick="goBack()" class="btn-primary btn"></body></div>');                
+     }});}});}});}); 
+
 
 
 
